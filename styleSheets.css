@@ -1,0 +1,67 @@
+header{
+    background-color: #0a64eb;
+    position: absolute;
+    width: 100%;
+    height: 4%;
+    top: 0;
+    left: 0;
+}
+
+#logo{
+    width: 32%;
+    height: 100%;
+}
+
+header span:hover{
+    padding: 1%;
+    background-color: #2888ff;
+}
+header span{
+    padding: 1%;
+    background-color: #0a64eb;
+    border: none;
+}
+
+span a{
+    color: white;
+}
+#span{
+    padding-top: 2%;
+    padding-bottom: 0.5%;
+}
+ #textArea{
+     margin-top: 6%;
+     margin-left: 10%;
+ }
+
+ #Twitts
+ {
+     margin-left: 125px;
+     margin-top: 12px;
+ }
+
+
+
+ ul {
+     list-style-type: none;
+     margin: 0;
+     padding: 0;
+     overflow: hidden;
+     background-color: #0a64eb;
+ }
+
+ li {
+     float: left;
+ }
+
+ li a {
+     display: block;
+     color: white;
+     text-align: center;
+     padding: 14px 16px;
+     text-decoration: none;
+ }
+
+ li a:hover {
+     background-color: #2888ff;
+ }
