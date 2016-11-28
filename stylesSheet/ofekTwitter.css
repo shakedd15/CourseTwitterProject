@@ -1,0 +1,27 @@
+
+#optionsBar{
+    text-align: right;
+}
+
+#textArea{
+    margin-top: 4.3vw;
+    margin-left: 12.45vw;
+}
+
+#Twitts
+{
+    margin-left: 12.5vw;
+    margin-top: 1.5vw;
+    font-family: sans-serif;
+}
+
+#textAreaObjec{
+    vertical-align: middle;
+    padding-top: 2vw;
+}
+
+.text{
+    vertical-align: top;
+    display: inline-block;
+    width: 950px;
+}

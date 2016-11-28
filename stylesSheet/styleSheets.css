@@ -1,0 +1,46 @@
+header{
+    background-color: #0a64eb;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+#ofektwitterText{
+    margin-left: -189%;
+}
+
+#logo{
+    width: 20%;
+}
+
+ ul {
+     list-style-type: none;
+     margin: 0;
+     padding: 0;
+     overflow: hidden;
+     background-color: #0a64eb;
+ }
+
+ li {
+     float: left;
+     font-family: sans-serif;
+     font-size: smaller;
+     text-shadow: 0.1vw 0.1vw 0.2vw #000000;
+ }
+
+ li a {
+     display: block;
+     color: white;
+     text-align: center;
+     padding: 0.7vw 0.8vw;
+     text-decoration: none;
+ }
+
+ li a:hover {
+     background-color: #2888ff;
+ }
+
+ .menu{
+     float: right;
+ }
