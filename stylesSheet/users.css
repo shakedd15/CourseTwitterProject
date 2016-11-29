@@ -1,91 +1,23 @@
-article, aside
-{
-    display: inline-block;
-    vertical-align: top;
-    text-align: justify;
-}
-
-
 
 #main_wrapper
 {
-    width: 74vw;
-    margin: auto;
-    margin-top: 4%;
-}
-
-article
-{
-    width: 52.3vw;
-    margin-right: 0.75vw;
-}
-
-article p
-{
-    font-size: 0.8em;
-}
-
-aside.div
-{
-    position: relative;
-    width: 11.75vw;
-    background-color: #706b64;
-    box-shadow: 2.5vw 0.1vw 0.25vw #1c1a19;
-    border-radius: 0.25vw;
-    padding: 0.5vw;
-    color: white;
-    font-size: 0.9em;
-    border-color: #0a64eb;
-}
-
-.singleUser{
-    border: 0.2vw solid;
-    border-radius: 0.25vw;
-    border-color: gainsboro;
-    width: 9.7vw;
-    height: 9.7vw;
-    display: inline-block;
-    text-align: center;
-    margin-top: 0.3vw;
-}
-
-.singleUser:hover{
-    border-color: #bababa;
-}
-
-.userPicture{
-    margin-top: 6%;
-}
-
-.userName{
-    font-size: smaller;
-    font-family: sans-serif;
-}
-
-#followsUser{
-    border: 0.3vw solid;
-    border-radius: 0.3vw;
-    border-color: gainsboro;
-    width: 15.1vw;
-    height: 25.4vw;
-    display: inline-block;
-    margin-left: 46%;
-}
-
-#insideFollowesUser{
-    margin-left: 19%;
+    margin: 4% auto auto;
 }
 
 h1{
-    margin-left: 29%;
     font-family: sans-serif;
 }
 
-#oneUser{
-    margin-top: 0.1vw;
+.thumbnail{
+    text-align: center;
+    height: 162px;
 }
 
-#filterFont{
-    font-family: sans-serif;
-    font-size: smaller;
+.createSpace{
+    margin: 1%;
+}
+
+.createBorder{
+    border: 4px solid #ddd;
+    height: 460px;
 }

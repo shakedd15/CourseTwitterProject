@@ -1,103 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head class="row">
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../stylesSheet/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="../stylesSheet/styleSheets.css">
     <link rel="stylesheet" type="text/css" href="../stylesSheet/users.css">
     <title>Title</title>
 </head>
 <body>
-<div id="main_wrapper">
-<header>
-    <ul>
-        <li><img id="logo" src="../images/ofek.png"></li>
-        <div id="optionsBar">
-            <li><a id="ofektwitterText" href="ofekTwitter.html">OfekTwitter</a></li>
-            <li class="menu"><a>sign in</a></li>
-            <li class="menu"><a>sign up</a></li>
-            <li class="menu"><a href="users.html">users</a></li>
-        </div>
-    </ul>
-</header>
-<section>
-    <form >
-        <span id="filterFont">Filter by</span>  <input type="text" name="filter" placeholder="user name"/>
-        <input type="button" name="ok" value="ok"  />
-        <br>
-    </form>
-    <article>
-        <div class="singleUser">
-            <div><img src="../images/useravatar.png" class="userPicture"></div>
-            <div>
-                <input type="button" name="ok" value="follow" class="followButonUser" /> <br/>
-                <span class="userName">Marty McFly</span>
+<div>
+    <header>
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand title" href="ofekTwitter.html">
+                    <img id="logo" src="../images/ofek.png">OfekTwitter</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="navbar-nav navbar-right">
+                    <li><a class="menu" href="users.html">users</a></li>
+                    <li><a class="menu" href="#">sign in</a></li>
+                    <li><a class="menu" href="#">sign out</a></li>
+                </ul>
             </div>
         </div>
-        <div class="singleUser">
-            <div><img src="../images/useravatar.png" class="userPicture"></div>
-            <div>
-                <input type="button" name="ok" value="follow" class="followButonUser" /> <br/>
-                <span class="userName">James Bond</span>
-            </div>
+    </header>
+
+<section class="container">
+    <div class="row createSpace">
+        <div class="col-md-3">
+            <input type="text" class="form-control" id="exampleInputName2" placeholder="Filter by user name">
+
         </div>
-        <div class="singleUser">
-            <div><img src="../images/useravatar.png" class="userPicture"></div>
-            <div>
-                <input type="button" name="ok" value="unfollow" class="followButonUser" /> <br/>
-                <span class="userName">Janis Joplin</span>
-            </div>
+        <div class="col-md-8">
+            <button type="button" class="btn btn-primary">ok</button>
         </div>
-        <div class="singleUser">
-            <div><img src="../images/useravatar.png" class="userPicture"></div>
-            <div>
-                <input type="button" name="ok" value="follow" class="followButonUser" /> <br/>
-                <span class="userName">Mark Twain</span>
+    </div>
+    <div class="row">
+        <div class="col-md-9">
+            <div class="col-md-2">
+                    <div class="thumbnail">
+                        <div><img src="../images/useravatar.png"></div><br/>
+                        <div>
+                            <button type="button" class="btn btn-primary">follow</button><br/>
+                            <span>Marty McFly</span>
+                        </div>
+                    </div>
             </div>
-        </div>
-        <div class="singleUser">
-            <div><img src="../images/useravatar.png" class="userPicture"></div>
-            <div>
-                <input type="button" name="ok" value="unfollow" class="followButonUser" /> <br/>
-                <span class="userName">Albert Einstein</span>
+            <div class="col-md-2">
+                    <div class="thumbnail">
+                        <div><img src="../images/useravatar.png"></div><br/>
+                        <div>
+                            <button type="button" class="btn btn-primary">follow</button><br/>
+                            <span>Janis Joplin</span>
+                        </div>
+                    </div>
             </div>
-        </div>
-        <div class="singleUser">
-            <div><img src="../images/useravatar.png" class="userPicture"></div>
-            <div>
-                <input type="button" name="ok" value="follow" class="followButonUser" /> <br/>
-                <span class="userName">Frodo</span>
+            <div class="col-md-2">
+                    <div class="thumbnail">
+                        <div><img src="../images/useravatar.png"></div><br/>
+                        <div>
+                            <button type="button" class="btn btn-primary">follow</button><br/>
+                            <span>Albert Einstein</span>
+                        </div>
+                    </div>
             </div>
-        </div>
-        <div class="singleUser">
-            <div><img src="../images/useravatar.png" class="userPicture"></div>
-            <div>
-                <input type="button" name="ok" value="follow" class="followButonUser" /> <br/>
-                <span class="userName">Bill Gates</span>
+            <div class="col-md-2">
+                    <div class="thumbnail">
+                        <div><img src="../images/useravatar.png"></div><br/>
+                        <div>
+                            <button type="button" class="btn btn-primary">follow</button> <br/>
+                            <span>Genghis Khan</span>
+                        </div>
+                    </div>
             </div>
-        </div>
-    </article>
-    <aside>
-        <div id="followsUser">
-            <h1>Followees</h1>
-            <div id="insideFollowesUser">
-            <div class="singleUser">
-                <div><img src="../images/useravatar.png" class="userPicture"></div>
-                <div>
-                <input type="button" name="ok" value="unfollow" class="followButonUser" /> <br/>
-                <span class="userName">Albert Einstein</span>
+            <div class="col-md-2">
+                    <div class="thumbnail">
+                        <div><img src="../images/useravatar.png"></div><br/>
+                        <div>
+                            <button type="button" class="btn btn-primary">unfollow</button> <br/>
+                            <span>Dracula</span>
+                        </div>
+                    </div>
+            </div>
+            <div class="col-md-2">
+                    <div class="thumbnail">
+                        <div><img src="../images/useravatar.png"></div><br/>
+                        <div>
+                            <button type="button" class="btn btn-primary">follow</button> <br/>
+                            <span>Forest Gump</span>
+                        </div>
+                    </div>
+            </div>
+            <div class="col-md-2">
+                    <div class="thumbnail">
+                        <div><img src="../images/useravatar.png"></div><br/>
+                        <div>
+                            <button type="button" class="btn btn-primary">follow</button> <br/>
+                            <span>Caligula</span>
+                        </div>
+                    </div>
+            </div>
+            <div class="col-md-2">
+                <div class="thumbnail">
+                    <div><img src="../images/useravatar.png"></div><br/>
+                    <div>
+                        <button type="button" class="btn btn-primary">follow</button> <br/>
+                        <span>Winnie the Pooh</span>
+                    </div>
                 </div>
             </div>
-            <div class="singleUser" id="oneUser">
-                <div><img src="../images/useravatar.png" class="userPicture"></div>
-                <div>
-                <input type="button" name="ok" value="unfollow" class="followButonUser" /> <br/>
-                <span class="userName">Janis Joplin</span>
+            <div class="col-md-2">
+                <div class="thumbnail">
+                    <div><img src="../images/useravatar.png"></div><br/>
+                    <div>
+                        <button type="button" class="btn btn-primary">follow</button> <br/>
+                        <span>Obama</span>
+                    </div>
+                </div>
             </div>
-            </div>
+            <div class="col-md-2">
+                <div class="thumbnail">
+                    <div><img src="../images/useravatar.png"></div><br/>
+                    <div>
+                        <button type="button" class="btn btn-primary">unfollow</button> <br/>
+                        <span>Henry the 8th</span>
+                    </div>
+                </div>
             </div>
         </div>
-    </aside>
-</section>
+        <div class="col-md-2">
+            <div class="thumbnail createBorder">
+                <h1>Followees</h1>
+                <div>
+                    <div class="thumbnail">
+                        <div><img src="../images/useravatar.png"></div><br/>
+                        <div>
+                            <button type="button" class="btn btn-primary">unfollow</button><br/>
+                            <span>Dracula</span>
+                        </div>
+                    </div>
+                    <div class="thumbnail">
+                        <div><img src="../images/useravatar.png"></div><br/>
+                        <div>
+                            <button type="button" class="btn btn-primary">unfollow</button><br/>
+                            <span>Henry the 8th</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    </section>
 </div>
 </body>
 </html>
