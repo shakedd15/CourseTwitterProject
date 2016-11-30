@@ -5,7 +5,9 @@
     <link rel="stylesheet" type="text/css" href="../stylesSheet/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="../stylesSheet/styleSheets.css">
     <link rel="stylesheet" type="text/css" href="../stylesSheet/ofekTwitter.css">
+
     <title>OfekTwitter</title>
+    <script src="ofekTwitter.js"></script>
 </head>
 <body>
 
@@ -36,53 +38,14 @@
     <div class="row">
         <div class="col-md-11">
             <div id="textArea">
-                <textarea class="form-control" rows="3" placeholder="tweet text..."></textarea>
-                <button type="button" class="btn btn-primary pull-right">Primary</button>
+                <textarea id="tweetContent" class="form-control" rows="3" placeholder="tweet text..."></textarea>
+                <button type="button" onclick="addCommant()" class="btn btn-primary pull-right">Primary</button>
             </div>
         </div>
 
 
         <div class="col-md-11">
-            <div class="row">
-                <span class="avatar"><img src="../images/useravatar.png" class="img-rounded"></span>
-                <span class="text">
-                <b>James Bond says:</b> <br/>
-            Blabla bla...
-        </span>
-            </div>
-
-            <div class="row">
-                <span class="avatar"><img src="../images/useravatar.png"></span>
-                <span class="text">
-                <b>James Bond says:</b> <br/>
-                Bond, James bond
-        </span>
-            </div>
-
-            <div class="row">
-                <span class="avatar"><img src="../images/useravatar.png"></span>
-                <span class="text">
-                <b>Albert Einstein says:</b> <br/>
-                E = mc^2
-        </span>
-            </div>
-
-            <div class="row">
-                <span class="avatar"><img src="../images/useravatar.png"></span>
-                <span class="text">
-                <b>Bill Gates says:</b> <br/>
-                I think 64 bytes should be enough for everyone
-        </span>
-            </div>
-
-            <div class="row">
-                <span class="avatar"><img src="../images/useravatar.png"></span>
-                <span class="text">
-                <b>Frodo says:</b> <br/>
-                My Precious
-        </span>
-            </div>
-
+            <div id="allTweets"></div>
         </div>
     </div>
 
