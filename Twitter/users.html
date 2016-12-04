@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="../stylesSheet/styleSheets.css">
     <link rel="stylesheet" type="text/css" href="../stylesSheet/users.css">
     <title>Title</title>
-    <script src="users.js"></script>
+    <script src="../javaScript/users.js"></script>
 </head>
 <body>
 <div>
@@ -36,14 +36,14 @@
 <section class="container">
     <div class="row createSpace">
         <div class="col-md-3">
-            <input type="text" class="form-control" id="exampleInputName2" placeholder="Filter by user name">
+            <input type="text" class="form-control" id="filter" onkeyup="filterFunction()" placeholder="Filter by user name">
 
         </div>
         <div class="col-md-8">
-            <button type="button" class="btn btn-primary">ok</button>
+            <button type="button" class="btn btn-primary" onclick="filterFunction()">ok</button>
         </div>
     </div>
-    <div class="row">
+    <div class="row" id="placeHolder">
         <div class="col-md-9" id="allUsers">
 
         </div>

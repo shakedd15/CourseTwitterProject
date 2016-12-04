@@ -1,11 +1,8 @@
-alert("gsgs")
-
 window.onload = function () {
-    for(user in tweets){
-        createSingleTwitt(tweets[user].username, tweets[user].text, false);
+    for (i=0; i<tweets.length; i++){
+        createSingleTwitt(tweets[i].username, tweets[i].text, false);
     }
-
-}
+};
 
 var tweets = [
     {username: 'Bobo', text: 'hello followers!'},
@@ -14,14 +11,11 @@ var tweets = [
 ];
 
 function addCommant() {
-    var contamt = document.getElementById("tweetContent").value;
-    var newUser = {username: 'Evgeny Nemzer', text: contamt};
-    tweets.push(newUser)
-    createSingleTwitt(newUser.username, newUser.text, true)
-}
 
-function publishAllTweets() {
-    document.getElementById("avatar").innerHTML;
+    var content = document.createTextNode(document.getElementById("tweetContent").value);
+    var newUser = {username: 'Evgeny Nemzer', text: content};
+    tweets.push(newUser);
+    createSingleTwitt(newUser.username, newUser.text, true)
 }
 
 function createSingleTwitt(username, text, isThisUser){
@@ -40,8 +34,12 @@ function createSingleTwitt(username, text, isThisUser){
     var b = document.createElement("b");
     b.innerHTML = username;
 
+    if(!isThisUser){
+        b.style.color = '#008000';
+    }
+
     var spanForText = document.createElement("span");
-    spanForText.innerHTML = text;
+    spanForText.append(text);
 
     var br = document.createElement("br");
 
@@ -50,7 +48,7 @@ function createSingleTwitt(username, text, isThisUser){
     secondSpan.appendChild(br);
     secondSpan.appendChild(spanForText);
     div.appendChild(firstSpan);
-    div.appendChild(secondSpan)
+    div.appendChild(secondSpan);
 
     document.getElementById("allTweets").appendChild(div);
 }
