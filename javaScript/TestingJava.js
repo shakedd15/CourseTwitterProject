@@ -1,9 +1,3 @@
-window.onload = function () {
-    test_group('first test group', function() {
-        assert(countingLogoImage(), "simple successful test");
-    });
-};
-
 function assert(value, name) {
     var placeHolder = document.getElementById("testPlace");
     var div = document.createElement("div");
@@ -38,4 +32,8 @@ function test_group(name, test_group_function){
 
 function countingLogoImage() {
     return document.querySelectorAll("#logo").length == 1;
+}
+
+function countingFiveTweet() {
+    return document.querySelectorAll(".row").length >= 5;
 }

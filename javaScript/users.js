@@ -1,6 +1,6 @@
 window.onload = function () {
     for (i=0; i<allUsers.length; i++){
-        createSingleTwitt(false, allUsers[i].username, "allUsers");
+        createSingleUser(false, allUsers[i].username, "allUsers");
     }
 };
 
@@ -17,6 +17,7 @@ var allUsers = [
     {username: 'Genghis Khan', button: ''}
 ];
 
+//TODO: להפריד לפונקציות
 function followingButtonAction(username) {
 
     var filterUser = allUsers.filter(function(e) {
@@ -34,12 +35,13 @@ function followingButtonAction(username) {
         });
     }else {
         filterUser[0].button.innerHTML = "unfollow";
-        createSingleTwitt(true, username, "myFollowers");
+        createSingleUser(true, username, "myFollowers");
     }
 
 }
 
-function createSingleTwitt(follow, username, List){
+//TODO: להפריד לפונקציות
+function createSingleUser(follow, username, List){
     var div = document.createElement("div");
 
     if(!follow){
@@ -102,16 +104,13 @@ function addButtonToUserList(button, username) {
     filterObj[0].button = button;
 }
 
-
 function filterFunction() {
-    // Declare variables
     var input, filter, allUsers, usersList, currentUser, i;
     input = document.getElementById("filter");
     filter = input.value.toUpperCase();
     allUsers = document.getElementById("allUsers");
     usersList = allUsers.getElementsByTagName("span");
 
-    // Loop through all table rows, and hide those who don't match the search query
     for (i = 0; i < usersList.length; i++) {
         currentUser = usersList[i].textContent;
         if (currentUser) {

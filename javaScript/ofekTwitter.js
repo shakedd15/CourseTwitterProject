@@ -2,12 +2,19 @@ window.onload = function () {
     for (i=0; i<tweets.length; i++){
         createSingleTwitt(tweets[i].username, tweets[i].text, false);
     }
+
+    test_group('first test group', function() {
+        assert(countingLogoImage(), "simple successful test");
+        assert(countingFiveTweet(), "counting 5 tweet-username classes under ot-body class");
+    });
 };
 
 var tweets = [
-    {username: 'Bobo', text: 'hello followers!'},
-    {username: 'Elvis', text: 'this exercise is really easy!'},
-    {username: 'Mimi', text: 'I want to go to sleep'}
+    {username: 'James Bond', text: 'Blablabla...'},
+    {username: 'James Bond', text: 'im hungry'},
+    {username: 'Albert Einstein', text: 'E = mc^2!'},
+    {username: 'Bill Gates', text: 'I think 64 bytes should be enough for everyone'},
+    {username: 'Frodo', text: 'My precious'}
 ];
 
 function addCommant() {
@@ -18,6 +25,7 @@ function addCommant() {
     createSingleTwitt(newUser.username, newUser.text, true)
 }
 
+//TODO: להפריד לפונקציות
 function createSingleTwitt(username, text, isThisUser){
     var div = document.createElement("div");
     div.className = "row";
