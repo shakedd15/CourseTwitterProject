@@ -50,9 +50,9 @@ function $(selector) {
 
     let selectors = selector.split(" ");
 
-    selectors.forEach(function(singleSelector){
-        elements = runTypeOfSelector(singleSelector, elements);
-        if(selectors.indexOf(singleSelector) != selectors.length-1){
+    selectors.forEach(function(currentSelector){
+        elements = runTypeOfSelector(currentSelector, elements);
+        if(selectors.indexOf(currentSelector) != selectors.length-1){
             elements = Array.from(new Set(addAllTheChildrenElements(elements)));
         }
     });

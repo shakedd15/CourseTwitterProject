@@ -26,15 +26,17 @@ function test_group(name, test_group_function){
     let divTestGroup = document.createElement("div");
     let h = document.createElement("h4");
     h.innerHTML = name;
-    placeHolder.appendChild(divTestGroup);
     divTestGroup.appendChild(h);
+    placeHolder.appendChild(divTestGroup);
     test_group_function();
     if(isSeccess){
         divTestGroup.style.backgroundColor = "#8bd497";
     }else {
         divTestGroup.style.backgroundColor = "#d4100c";
     }
+
     divTestGroup.appendChild(ul);
+
 }
 
 function countingLogoImage() {
