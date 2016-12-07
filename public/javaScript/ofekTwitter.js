@@ -50,7 +50,6 @@ function addCommant() {
     let content = document.createTextNode(document.getElementById("tweetContent").value);
     let newUser = {user: userId, text: content};
     axios.post('http://localhost:8000/AddComment',newUser);
-    // createSingleTwitt(newUser.user, newUser.text, true);
 }
 
 //TODO: להפריד לפונקציות
