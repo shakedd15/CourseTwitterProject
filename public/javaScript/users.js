@@ -1,7 +1,14 @@
+var userId = "10c06b27-d8ee-4435-9cee-0a2a838ca14a";
+let usersDetails = [];
+
 window.onload = function () {
     for (i=0; i<allUsers.length; i++){
         createSingleUser(false, allUsers[i].username, "allUsers");
     }
+
+    // axios.get('http://10.103.50.193:8080/users')
+    //     .then(function (response) {
+    //         usersDetails = response.data;});
 };
 
 var allUsers = [

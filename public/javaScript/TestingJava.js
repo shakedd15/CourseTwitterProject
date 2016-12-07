@@ -4,34 +4,29 @@ function assert(value, name) {
     isSeccess = value;
     ul = document.createElement("ul");
     let placeHolder = document.getElementById("testPlace");
-    let li = document.createElement("testIfAllSuccess");
-    li.style.border = "1px";
-    li.style.borderColor = "black";
-    li.style.borderStyle = "groove";
-    li.innerHTML = name;
+    let testItem = document.createElement("testIfAllSuccess");
+    testItem.style.border = "1px";
+    testItem.style.borderColor = "black";
+    testItem.style.borderStyle = "groove";
+    testItem.innerHTML = name;
 
-    if(value == true){
-        li.style.backgroundColor = "#8bd497";
-    }
-    else {
-        li.style.backgroundColor = "#d4100c";
-    }
+    testItem.style.backgroundColor = value ? "#8bd497" : "#d4100c";
 
-    ul.appendChild(li);
+    ul.appendChild(testItem);
     placeHolder.appendChild(ul);
 }
 
-function test_group(name, test_group_function){
+function test_group(name, test_group_function) {
     let placeHolder = document.getElementById("testPlace");
     let divTestGroup = document.createElement("div");
-    let h = document.createElement("h4");
-    h.innerHTML = name;
-    divTestGroup.appendChild(h);
+    let testTitle = document.createElement("h4");
+    testTitle.innerHTML = name;
+    divTestGroup.appendChild(testTitle);
     placeHolder.appendChild(divTestGroup);
     test_group_function();
-    if(isSeccess){
+    if (isSeccess) {
         divTestGroup.style.backgroundColor = "#8bd497";
-    }else {
+    } else {
         divTestGroup.style.backgroundColor = "#d4100c";
     }
 
@@ -40,7 +35,7 @@ function test_group(name, test_group_function){
 }
 
 function countingLogoImage() {
-    return document.querySelectorAll("#logo").length == 1;
+    return document.querySelectorAll("#logo").length === 1;
 }
 
 function countingFiveTweet() {
@@ -76,8 +71,10 @@ function changeColorWord() {
     return arry[0]["style"].color == "green";
 }
 
-function allFunctionWork(){
-    return $("b").all(function(element) {return element.innerHTML.length > 1});
+function allFunctionWork() {
+    return $("b").all(function (element) {
+        return element.innerHTML.length > 1
+    });
 }
 
 function testIfAllSuccess() {

@@ -1,7 +1,8 @@
+var userId = "10c06b27-d8ee-4435-9cee-0a2a838ca14a";
+let tweets = [];
+let users = [];
+
 window.onload = function () {
-    for (i=0; i<tweets.length; i++){
-        createSingleTwitt(tweets[i].username, tweets[i].text, false);
-    }
 
     test_group('Selectors', function() {
         assert(countingLogoImage(), "simple successful test");
@@ -20,22 +21,36 @@ window.onload = function () {
         assert(testIfAllSuccess(), "all function counts 1 child for all nav-btn class elements");
         assert(testIfOneFeild(), "any function doesn't find a nav-btn class element with no children");
     });
-};
 
-let tweets = [
-    {username: 'James Bond', text: 'Blablabla...'},
-    {username: 'James Bond', text: 'im hungry'},
-    {username: 'Albert Einstein', text: 'E = mc^2!'},
-    {username: 'Bill Gates', text: 'I think 64 bytes should be enough for everyone'},
-    {username: 'Frodo', text: 'My precious'}
-];
+    axios.get('http://localhost:8000/Data/twitts')
+        .then(function (response) {
+            tweets = response.data;
+        })
+        .then(function () {
+            var tweetsPromises = tweets.map(function tweetToPromise(tweet) {
+                return axios.get('http://localhost:8000/Data/users/' + tweet.user)
+                    .then(function (response) {
+                        users.push(response.data);
+                    })
+            });
+            let allPromise = axios.all(tweetsPromises);
+            return allPromise;
+        }).then(function(){
+        tweets.forEach(function (tweet) {
+            tweet.user = users.filter(function(currentUser) {
+                return currentUser._id === tweet.user;
+            });
+            createSingleTwitt(tweet.user[0].username, tweet.text, false);
+        });
+    });
+};
 
 function addCommant() {
 
     let content = document.createTextNode(document.getElementById("tweetContent").value);
-    let newUser = {username: 'Evgeny Nemzer', text: content};
-    tweets.push(newUser);
-    createSingleTwitt(newUser.username, newUser.text, true)
+    let newUser = {user: userId, text: content};
+    axios.post('http://localhost:8000/AddComment',newUser);
+    // createSingleTwitt(newUser.user, newUser.text, true);
 }
 
 //TODO: להפריד לפונקציות
