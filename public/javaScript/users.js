@@ -1,73 +1,104 @@
-var userId = "10c06b27-d8ee-4435-9cee-0a2a838ca14a";
+let userId;
 let usersDetails = [];
+let allUsers = [];
 
 window.onload = function () {
-    for (i=0; i<allUsers.length; i++){
-        createSingleUser(false, allUsers[i].username, "allUsers");
-    }
-
-    // axios.get('http://10.103.50.193:8080/users')
-    //     .then(function (response) {
-    //         usersDetails = response.data;});
+    getUser('10c06b27-d8ee-4435-9cee-0a2a838ca14a')
+    .then(addTheUserMoreData)
+    .then(function () {
+        getAllUsers()
+            .then(addAllUserToArray)
+            .then(addUsersToList)
+            .then(pasteSingleUser);
+        addFollowing()
+    });
 };
 
-var allUsers = [
-    {username: 'Marty McFly', button: ''},
-    {username: 'Janis Joplin', button: ''},
-    {username: 'Albert Einstein', button: ''},
-    {username: 'Dracula', button: ''},
-    {username: 'Forest Gump', button: ''},
-    {username: 'Caligula', button: ''},
-    {username: 'Winnie the Pooh', button: ''},
-    {username: 'Obama', button: null},
-    {username: 'Henry the 8th', button: ''},
-    {username: 'Genghis Khan', button: ''}
-];
-
-//TODO: להפריד לפונקציות
-function followingButtonAction(username) {
-
-    var filterUser = allUsers.filter(function(e) {
-        return e.username == username;
-    });
-
-    if(filterUser[0].button.innerHTML == "unfollow"){
-        filterUser[0].button.innerHTML = "follow";
-        var list = document.getElementById("myFollowers");
-        var listOfDivs = list.querySelectorAll(".user");
-        listOfDivs.forEach(function (userDiv) {
-            if(userDiv.querySelectorAll("span")[0].innerHTML == username){
-                userDiv.style.display = "none";
-            }
-        });
-    }else {
-        filterUser[0].button.innerHTML = "unfollow";
-        createSingleUser(true, username, "myFollowers");
-    }
-
+function addTheUserMoreData(response) {
+    userId = response.data;
 }
 
-//TODO: להפריד לפונקציות
-function createSingleUser(follow, username, List){
-    var div = document.createElement("div");
+function addUsersToList() {
+    usersDetails.forEach(function (user) {
+        if(user._id !== userId._id){
+            allUsers.push({username:user.username, button:'', user: user, follow:(userId.following.indexOf(user._id)!= -1)});
+        }
+    });
+}
 
-    if(!follow){
+function addAllUserToArray(response) {
+    usersDetails = response.data;
+}
+function pasteSingleUser() {
+    allUsers.forEach(function (user) {
+        createSingleUser(user.follow, user, "allUsers");
+    });
+}
+function addFollowing() {
+    userId.following.forEach(function (currentUser) {
+        getUser('currentUser')
+            .then(function (response) {
+                createSingleUser(true, response.data, "myFollowers");
+                changeFollowStateOfUser(response.data.username)
+            });
+    });
+}
+
+function changeFollowStateOfUser(username) {
+    let filterUser = allUsers.filter(function(user) {
+        return user.username === username;
+    });
+    filterUser.follow = true;
+}
+
+function followingButtonAction(user){
+    let filterUser = allUsers.filter(function(e) {
+        return e.username === user.username;
+    });
+    if(filterUser[0].button.innerHTML === "unfollow"){
+        unfollowUser(filterUser[0], user);
+    }else {
+        followUser(filterUser[0], user);
+    }
+}
+
+function unfollowUser(filterUser, user) {
+    filterUser.button.innerHTML = "follow";
+    let list = document.getElementById("myFollowers");
+    let listOfDivs = list.querySelectorAll(".user");
+    axios.put('http://localhost:8000/removeUser', {id:user._id});
+    listOfDivs.forEach(function (userDiv) {
+        if(userDiv.querySelectorAll("span")[0].innerHTML === user.username){
+            userDiv.style.display = "none";
+        }
+    });
+}
+
+function followUser(filterUser, user) {
+    filterUser.button.innerHTML = "unfollow";
+    axios.put('http://localhost:8000/newUser', {id:user.user._id});
+    createSingleUser(true, user, "myFollowers");
+}
+
+function createSingleUser(follow, user, List){
+    let div = document.createElement("div");
+    if(List === "allUsers"){
         div.className = "col-md-2 ";
     }else {
         div.className = "user";
     }
 
-    var innerDiv = document.createElement("div");
+    let innerDiv = document.createElement("div");
     innerDiv.className = "thumbnail";
 
-    var divForImg = document.createElement("div");
+    let divForImg = document.createElement("div");
 
-    var img = document.createElement("img");
+    let img = document.createElement("img");
     img.src = "../images/useravatar.png";
 
-    var divForContent = document.createElement("div");
+    let divForContent = document.createElement("div");
 
-    var button = document.createElement("button");
+    let button = document.createElement("button");
     button.className = "btn btn-primary";
     button.type = "button";
 
@@ -78,14 +109,14 @@ function createSingleUser(follow, username, List){
         button.innerHTML = "unfollow";
     }
 
-    button.onclick = function(){followingButtonAction(username)};
+    button.onclick = function(){followingButtonAction(user)};
 
 
-    var span = document.createElement("span");
-    span.innerHTML = username;
+    let span = document.createElement("span");
+    span.innerHTML = user.username;
 
-    var br1 = document.createElement("br");
-    var br2 = document.createElement("br");
+    let br1 = document.createElement("br");
+    let br2 = document.createElement("br");
 
     divForImg.appendChild(img);
     divForContent.appendChild(button);
@@ -97,22 +128,22 @@ function createSingleUser(follow, username, List){
     div.appendChild(innerDiv);
 
 
-    if(!follow){
-        addButtonToUserList(button, username);
+    if(List === "allUsers"){
+        addButtonToUserList(button, user);
     }
 
     document.getElementById(List).appendChild(div);
 }
 
-function addButtonToUserList(button, username) {
-    var filterObj = allUsers.filter(function(e) {
-        return e.username == username;
+function addButtonToUserList(button, user) {
+    let filterObj = allUsers.filter(function(e) {
+        return e.username == user.username;
     });
     filterObj[0].button = button;
 }
 
 function filterFunction() {
-    var input, filter, allUsers, usersList, currentUser, i;
+    let input, filter, allUsers, usersList, currentUser, i;
     input = document.getElementById("filter");
     filter = input.value.toUpperCase();
     allUsers = document.getElementById("allUsers");
@@ -129,4 +160,3 @@ function filterFunction() {
         }
     }
 }
-

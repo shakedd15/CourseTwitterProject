@@ -1,13 +1,10 @@
-var express = require('express');
-var app = express();
-var fs = require('fs');
-var path = require('path');
-var bodyParser = require('body-parser');
+let express = require('express');
+let app = express();
+let fs = require('fs');
+let bodyParser = require('body-parser');
 
-// parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// parse application/json
 app.use(bodyParser.json());
 
 app.use(express.static('./public'));
@@ -23,7 +20,7 @@ app.get("/users", function(req, res) {
 const PORT = 8000;
 
 app.listen(PORT, function () {
-    console.log('Example app listening on port: ' + PORT);
+    console.log('app listening on port: ' + PORT);
 });
 
 app.get('/Data/users', function (req, res) {
@@ -42,12 +39,33 @@ app.get('/Data/twitts', function (req, res) {
     res.sendfile('./public/data/twitts.json');
 });
 
-app.post('/AddComment',function(req,res){
+app.put('/AddComment',function(req,res){
     fs.readFile('./public/data/twitts.json',function (err, content) {
         let tweets = JSON.parse(content.toString());
         tweets.push({text: req.body.text, user: req.body.user});
-        fs.writeFile('./public/json/tweets.json',JSON.stringify(tweets));
-        res.send(JSON.stringify(tweets), 'utf-8');
+        fs.writeFile('./public/data/twitts.json',JSON.stringify(tweets));
+        res.sendfile('./public/data/twitts.json');
+    });
+});
+
+app.put('/newUser',function(req,res){
+    fs.readFile('./public/data/users.json',function (err, content) {
+        let users = JSON.parse(content.toString());
+        let user = getUserByID(users, '10c06b27-d8ee-4435-9cee-0a2a838ca14a');
+        user.following.push(req.body.id);
+        fs.writeFile('./public/data/users.json',JSON.stringify(users));
+        res.sendfile('./public/data/users.json');
+    });
+});
+
+app.put('/removeUser',function(req,res){
+    fs.readFile('./public/data/users.json',function (err, content) {
+        let users = JSON.parse(content.toString());
+        let user = getUserByID(users, '10c06b27-d8ee-4435-9cee-0a2a838ca14a');
+        let index = user.following.indexOf(req.body.id);
+        user.following.splice(index, 1);
+        fs.writeFile('./public/data/users.json',JSON.stringify(users));
+        res.sendfile('./public/data/users.json');
     });
 });
 
@@ -55,7 +73,7 @@ app.get('/Data/twitts/:userId', function (req, res) {
     fs.readFile('./public/data/twitts.json', function (err, content) {
         let twitts = JSON.parse(content.toString());
         let user = GetAllTweetsOfUserId(twitts, req.params.id);
-        res.send(JSON.stringify(user), 'utf-8');
+        res.send(JSON.stringify(user));
     })
 });
 
