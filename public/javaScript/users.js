@@ -29,14 +29,16 @@ function addUsersToList() {
 function addAllUserToArray(response) {
     usersDetails = response.data;
 }
+
 function pasteSingleUser() {
     allUsers.forEach(function (user) {
         createSingleUser(user.follow, user, "allUsers");
     });
 }
+
 function addFollowing() {
     userId.following.forEach(function (currentUser) {
-        getUser('currentUser')
+        getUser(currentUser)
             .then(function (response) {
                 createSingleUser(true, response.data, "myFollowers");
                 changeFollowStateOfUser(response.data.username)
@@ -160,3 +162,17 @@ function filterFunction() {
         }
     }
 }
+
+describe('users', function () {
+    describe('pasteSingleUser', function () {
+        beforeEach(function () {
+            var user = {"_id":"c28dd406-3595-42f6-8e36-15d4cd495293","username":"Lolita","password":"amet","following":[]}
+            allUsers.push({username:'shaked', button:'', user: user, follow:[]});
+        });
+        it('is paste Single User', function () {
+            var result = spyOn(window, 'createSingleUser');
+            pasteSingleUser();
+            expect(result).toHaveBeenCalled();
+        })
+    });
+});

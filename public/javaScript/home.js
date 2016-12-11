@@ -1,4 +1,4 @@
-let userId;
+
 let twitts = [];
 let users = [];
 
@@ -106,3 +106,47 @@ function createHtmlPlace(user) {
     b.innerHTML = user.username;
     return b;
 }
+
+describe('home', function () {
+    var spyGet;
+    var spyPut;
+    var spyPost;
+    beforeEach(function () {
+       spyGet = spyOn(axios, 'get');
+       spyPut = spyOn(axios, 'put');
+       spyPost = spyOn(axios, 'post');
+    });
+    describe("createDiv", function () {
+       it("check if div created", function () {
+           var div = createDiv();
+           expect(div).not.toBeNull();
+       })
+    });
+    // describe('addCommant', function () {
+    //     beforeEach(function () {
+    //         userId = {_id:"c28dd406-3595-42f6-8e36-15d4cd495293",username:"Lolita",password:"hombert",following:[]};
+    //     });
+    //     it('is commant add correctly', function () {
+    //         var result = spyOn(window, 'putTwitt');
+    //         var dummyElement = document.createElement('div');
+    //         document.getElementById = jasmine.createSpy('HTML Element').and.returnValue(dummyElement);
+    //         addCommant();
+    //         var newUser = {user: "c28dd406-3595-42f6-8e36-15d4cd495293", text: "shaked 2016"};
+    //         expect(result).toHaveBeenCalledWith(newUser);
+    //     })
+    // })
+    // describe("find user by tweet test with mock", function () {
+    //     it("test", function () {
+    //         spyGet.and.returnValue(new Promise(function (resolve) {
+    //             resolve([{text:"hey",user:"1"}, {text:"by",user:"2"}, {text:"no",user:"3"}])
+    //         }));
+    //         expect(result).toEqual([{text:"hey",user:"1"}, {text:"by",user:"2"}, {text:"no",user:"3"}]);
+    //         var result = getAllTwitts().then(function (response) {
+    //             return response.data;
+    //         }).then(function () {
+    //
+    //         })
+    //     })
+    // })
+
+});
