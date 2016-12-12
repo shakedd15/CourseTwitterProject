@@ -130,23 +130,20 @@ describe('home', function () {
     //         var result = spyOn(window, 'putTwitt');
     //         var dummyElement = document.createElement('div');
     //         document.getElementById = jasmine.createSpy('HTML Element').and.returnValue(dummyElement);
+    //         expect(document.getElementById("tweetContent").innerHTML).toEqual('shaked 2016');
     //         addCommant();
     //         var newUser = {user: "c28dd406-3595-42f6-8e36-15d4cd495293", text: "shaked 2016"};
     //         expect(result).toHaveBeenCalledWith(newUser);
     //     })
-    // })
-    // describe("find user by tweet test with mock", function () {
-    //     it("test", function () {
-    //         spyGet.and.returnValue(new Promise(function (resolve) {
-    //             resolve([{text:"hey",user:"1"}, {text:"by",user:"2"}, {text:"no",user:"3"}])
-    //         }));
-    //         expect(result).toEqual([{text:"hey",user:"1"}, {text:"by",user:"2"}, {text:"no",user:"3"}]);
-    //         var result = getAllTwitts().then(function (response) {
-    //             return response.data;
-    //         }).then(function () {
-    //
-    //         })
-    //     })
-    // })
+    // });
+    describe("find user by tweet test with mock", function () {
+        it("test", function () {
+            spyGet.and.returnValue(new Promise(function (resolve) {
+                resolve([{text:"hey",user:"1"}, {text:"by",user:"2"}, {text:"no",user:"3"}])
+            }));
+            var result = getAllTwitts();
+            expect(result).toBeTruthy()
+        })
+    })
 
 });

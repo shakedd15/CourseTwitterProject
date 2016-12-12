@@ -1,40 +1,10 @@
-
-
 function $(selector) {
-    let OfekQuery = function (elemnts) {
+    var OfekQuery = function (elemnts) {
         this.elements = elemnts;
     };
 
-    function runTypeOfSelector(selector, elements) {
-        if (selector[0] == "#") {
-            return getIdFromDocument(selector, elements);
-        } else if (selector[0] == ".") {
-            return getClassFromDocument(selector, elements);
-        } else {
-            return getTagFromDocument(selector, elements);
-        }
-    }
-
-    function getTagFromDocument(selector, elements) {
-        return elements.filter(function (element) {
-            return element.tagName === selector.toUpperCase();
-        });
-    }
-
-    function getIdFromDocument(selector, elements) {
-        return elements.filter(function (elem) {
-            return elem.id === selector.substring(1);
-        });
-    }
-
-    function getClassFromDocument(selector, elements) {
-        return elements.filter(function (elem) {
-            return elem.classList.contains(selector.substring(1));
-        });
-    }
-
     function addAllTheChildrenElements(elements) {
-        let elementsList = [];
+        var elementsList = [];
         elements.forEach(function (currentElement) {
             if (currentElement.children.length) {
                 Array.from(currentElement.getElementsByTagName("*")).forEach(function (childElement) {
@@ -47,9 +17,9 @@ function $(selector) {
         return elementsList;
     }
 
-    let elements = Array.from(document.getElementsByTagName("*"));
+    var elements = Array.from(document.getElementsByTagName("*"));
 
-    let selectors = selector.split(" ");
+    var selectors = selector.split(" ");
 
     selectors.forEach(function (currentSelector) {
         elements = runTypeOfSelector(currentSelector, elements);
@@ -77,19 +47,19 @@ function $(selector) {
     };
 
     OfekQuery.prototype.map = function (fn) {
-        let newArray = [];
-        elements.forEach(function (element) {
-            let currentNode = element.cloneNode(true);
-            fn(currentNode);
-            newArray.push(currentNode)
+        var tempElements = [];
+        elements.forEach(function (elem) {
+            var tempNode = elem.cloneNode(true);
+            var shaked = fn(tempNode);
+            tempElements.push(shaked)
         });
-        return newArray;
+        return tempElements;
     };
 
     OfekQuery.prototype.any = function () {
-        let functions = Array.from(arguments);
-        for (let element of elements) {
-            for (let fn of functions) {
+        var functions = Array.from(arguments);
+        for (var element of elements) {
+            for (var fn of functions) {
                 if (fn(element) && functions(fn) == functions.length - 1) {
                     return true;
                 }
@@ -99,9 +69,9 @@ function $(selector) {
     };
 
     OfekQuery.prototype.all = function () {
-        let functions = Array.from(arguments);
-        for (let element of elements) {
-            for (let fn of functions) {
+        var functions = Array.from(arguments);
+        for (var element of elements) {
+            for (var fn of functions) {
                 if (!fn(element)) {
                     return false;
                 }
@@ -111,10 +81,10 @@ function $(selector) {
     };
 
     OfekQuery.prototype.filter = function (fn) {
-        let functions = Array.from(arguments);
-        let ofekQuery = [];
-        for (let element of elements) {
-            for (let fn of functions) {
+        var functions = Array.from(arguments);
+        var ofekQuery = [];
+        for (var element of elements) {
+            for (var fn of functions) {
                 if (fn(element) && functions(fn) == functions.length - 1) {
                     ofekQuery.push(element);
                 }
@@ -144,7 +114,7 @@ function $(selector) {
     };
 
     OfekQuery.prototype.getAttribute = function (attributeName) {
-        let atributeArray = [];
+        var atributeArray = [];
         elements.forEach(function (element) {
             if (element[attributeName]) {
                 atributeArray.push(element);
@@ -154,9 +124,41 @@ function $(selector) {
     };
 
     OfekQuery.prototype.appendChild = function (childElement) {
-        elements.push(childElement);
+        var docFrag = document.createDocumentFragment();
+        docFrag.appendChild(childElement);
+
+        elements.forEach(function (elem) {
+            elem.appendChild(docFrag.cloneNode(true));
+        });
     };
 
     return new OfekQuery(elements);
 }
 
+function runTypeOfSelector(selector, elements) {
+    if (selector[0] == "#") {
+        return getIdFromDocument(selector, elements);
+    } else if (selector[0] == ".") {
+        return getClassFromDocument(selector, elements);
+    } else {
+        return getTagFromDocument(selector, elements);
+    }
+}
+
+function getTagFromDocument(selector, elements) {
+    return elements.filter(function (element) {
+        return element.tagName === selector.toUpperCase();
+    });
+}
+
+function getIdFromDocument(selector, elements) {
+    return elements.filter(function (elem) {
+        return elem.id === selector.substring(1);
+    });
+}
+
+function getClassFromDocument(selector, elements) {
+    return elements.filter(function (elem) {
+        return elem.classList.contains(selector.substring(1));
+    });
+}
